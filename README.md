@@ -1,6 +1,6 @@
 # What is PHP PNGQuant
 
-PHP-PNGQuant is a non-official wrapper for the great [PNGQuant](https://github.com/pornel/pngquant), the command-line utility and a library for lossy compression of PNG images. It uses `shell_exec` under the hood.
+PHP-PNGQuant is a non-official wrapper for the great [PNGQuant](https://github.com/pornel/pngquant), the command-line utility and a library for lossy compression of PNG images.
 
 # Requirements
 
