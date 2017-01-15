@@ -16,6 +16,27 @@ class PNGQuant
 
     private $_options = array();
 
+    /**
+     * The error table is based in the pngquant_error enum of the official library
+     * @see https://github.com/pornel/pngquant/blob/8eebc5702df6901cff71062fc616c4441bfeb48f/rwpng.h#L47
+     */
+    private $_errorTable = array(
+        "0" => "SUCCESS",
+        "1" => "MISSING_ARGUMENT",
+        "2" => "READ_ERROR",
+        "4" => "INVALID_ARGUMENT",
+        "15" => "NOT_OVERWRITING_ERROR",
+        "16" => "CANT_WRITE_ERROR",
+        "17" => "OUT_OF_MEMORY_ERROR",
+        "18" => "WRONG_ARCHITECTURE", // Missing SSE
+        "24" => "PNG_OUT_OF_MEMORY_ERROR",
+        "25" => "LIBPNG_FATAL_ERROR",
+        "26" => "WRONG_INPUT_COLOR_TYPE",
+        "35" => "LIBPNG_INIT_ERROR",
+        "98" => "TOO_LARGE_FILE",
+        "99" => "TOO_LOW_QUALITY"
+    );
+
     function __construct(){}
 
     function setBinaryPath($pathToBinary){
@@ -79,6 +100,10 @@ class PNGQuant
 
     function disableDithering(){
         return $this->setOption('--nofs');
+    }
+
+    function getErrorTable(){
+        return $this->_errorTable;
     }
 
     function setImage($imagePath){
