@@ -53,7 +53,7 @@ use ourcodeworld\PNGQuant\PNGQuant;
 $instance = new PNGQuant();
 
 // Set the path to the image to compress
-$output = $instance->setImage("/a-folder/image-original.png")
+$exit_code = $instance->setImage("/a-folder/image-original.png")
     // Set the output filepath
     ->setOutputImage("/a-folder/image-compressed.png")
     // Overwrite output file if exists, otherwise pngquant will generate output ...
@@ -64,10 +64,11 @@ $output = $instance->setImage("/a-folder/image-original.png")
     // Execute the command
     ->execute();
 
-if(!empty($output)){
-    // pngquant usually doesn't provide output, if it does
-    // it's probably an error, so get the output
-    echo "Oops, not output should be generated, maybe an error : ". $output;
+// if exit code is equal to 0 then everything went right !
+if(!$exit_code){
+    echo "Image succesfully compressed";
+}else{
+    echo "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code];
 }
 ```
 
