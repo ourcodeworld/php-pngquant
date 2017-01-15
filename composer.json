@@ -1,7 +1,7 @@
 {
     "name": "ourcodeworld/php-pngquant",
     "description": "A non-official PHP Wrapper class for pngquant, the command-line utility and a library for lossy compression of PNG images.",
-    "type": "package",
+    "type": "library",
     "require": {
         "php": ">=5.3.0"
     },

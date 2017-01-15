@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * (c) Our Code World <dev@ourcodeworld.com>
  *
@@ -34,7 +34,7 @@ class PNGQuant
                 array_splice($this->_options, $i, 1);
             }
         }
-    
+
         array_push($this->_options, array(
             'key' => $key,
             'value' => $value,
@@ -58,11 +58,11 @@ class PNGQuant
                 $_command .= " $key";
                 continue;
             }
-            
+
             if($isPath){
                 $value = escapeshellarg($value);
             }
-            
+
             if($space){
                 $_command .= " $key $value";
             }else{
@@ -119,11 +119,15 @@ class PNGQuant
     }
 
     function removeMetadata(){
-        return $this->setOption('--strip');    
+        return $this->setOption('--strip');
     }
 
     function execute(){
         $consoleInstruction = $this->buildCommand();
-        return shell_exec($consoleInstruction);
+        $output = null;
+
+        system($consoleInstruction, $output);
+
+        return $output;
     }
 }
