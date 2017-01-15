@@ -21,10 +21,16 @@ $instance->setBinaryPath("C:\\Users\\sdkca\\Desktop\\pngquant.exe")
 
 # Installation
 
+php-pngquant can be used either with or without Composer.
+
 ## With Composer
+
+The preferred way to use php-pngquant is with Composer. Execute the following command to install this package as a dependency in your project:
+
 ```batch
 composer require ourcodeworld/php-pngquant
 ```
+
 ## Without Composer
 
 If you don't use composer, you can still use the wrapper. Download the [PNGQuant.php](https://github.com/ourcodeworld/php-pngquant/blob/master/src/PNGQuant.php) class from the repository and then use `require_once` to import it in your code:
@@ -36,13 +42,7 @@ require_once("PNGQuant.php");
 
 $instance = new PNGQuant();
 
-// Change the path to the binary of pngquant, for example in windows would be (with an example path):
-$output = $instance->setImage("image-original.png")
-      ->setOutputImage("image-compressed.png")
-      // Overwrite output file if exists
-      ->overwriteExistingFile()
-      ->setQuality(50,80)
-      ->execute();
+// Configuration here ...
 ```
 # Example
 
@@ -78,7 +78,7 @@ For further information and examples of the wrapper, please [visit the official 
 The MIT License (MIT)
 =====================
 
-Copyright © `2017` `Our Code World`
+Copyright © 2017 Our Code World
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
