@@ -163,6 +163,7 @@ class PNGQuant
      * Execute PNGQUANT with the providen commands and retrieve the generated image 
      * directly into a variable
      */
+    function getRawOutput(){
         // Create a temporal file in the system
         $fileName = uniqid().'.png';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);

@@ -46,6 +46,8 @@ $instance = new PNGQuant();
 ```
 # Example
 
+Save the file directly into a directory with a file name.
+
 ```php
 // Include the class
 use ourcodeworld\PNGQuant\PNGQuant;
@@ -67,6 +69,43 @@ $exit_code = $instance->setImage("/a-folder/image-original.png")
 // if exit code is equal to 0 then everything went right !
 if(!$exit_code){
     echo "Image succesfully compressed";
+}else{
+    echo "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code];
+}
+```
+
+If you need the raw data of the image (store the binary data of the compressed image), you can use the `getRawOutput` function:
+
+```php
+// Include the class
+use ourcodeworld\PNGQuant\PNGQuant;
+
+$instance = new PNGQuant();
+
+// Set the path to the image to compress
+$result = $instance->setImage("/a-folder/image-original.png")
+    // Set the output filepath
+    ->setOutputImage("/a-folder/image-compressed.png")
+    // Overwrite output file if exists, otherwise pngquant will generate output ...
+    ->overwriteExistingFile()
+    // As the quality in pngquant isn't fixed (it uses a range)
+    // set the quality between 50 and 80
+    ->setQuality(50,80)
+    // Retrieve RAW data from pngquant
+    ->getRawOutput();
+
+$exit_code = $result["statusCode"];
+
+
+// if exit code is equal to 0 then everything went right !
+if($exit_code == 0){
+
+    $rawImage = imagecreatefromstring($result["imageData"]);
+
+    // Example Save the PNG Image from the raw data into a file or do whatever you want.
+    // imagepng($rawImage , 'newfile.png');
+
+    echo "Image succesfully compressed, do something with the raw Data";
 }else{
     echo "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code];
 }
