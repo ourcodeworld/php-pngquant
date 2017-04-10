@@ -84,8 +84,6 @@ $instance = new PNGQuant();
 
 // Set the path to the image to compress
 $result = $instance->setImage("/a-folder/image-original.png")
-    // Set the output filepath
-    ->setOutputImage("/a-folder/image-compressed.png")
     // Overwrite output file if exists, otherwise pngquant will generate output ...
     ->overwriteExistingFile()
     // As the quality in pngquant isn't fixed (it uses a range)
