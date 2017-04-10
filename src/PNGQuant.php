@@ -147,6 +147,9 @@ class PNGQuant
         return $this->setOption('--strip');
     }
 
+    /**
+     * Run the built command
+     */
     function execute(){
         $consoleInstruction = $this->buildCommand();
         $output = null;
@@ -154,5 +157,29 @@ class PNGQuant
         system($consoleInstruction, $output);
 
         return $output;
+    }
+
+    /**
+     * Execute PNGQUANT with the providen commands and retrieve the generated image 
+     * directly into a variable
+     */
+        // Create a temporal file in the system
+        $fileName = uniqid().'.png';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+
+        // Set the output path the tmp file
+        $this->setOutputImage($temp_file);
+
+        $consoleInstruction = $this->buildCommand();
+        
+        $output = null;
+
+        system($consoleInstruction, $output);
+        
+        return array(
+            'statusCode' => $output,
+            'tempFile' => $temp_file,
+            'imageData' => file_get_contents($temp_file)
+        );
     }
 }
